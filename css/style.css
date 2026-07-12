@@ -81,7 +81,7 @@ mask-image:radial-gradient(ellipse 100% 60% at 50% 0%,#000 0%,transparent 80%);
 .logo-icon{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;flex-shrink:0;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid rgba(239,68,68,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
 .logo-icon svg{width:36px;height:36px;display:block}
 .logo-text{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.4rem;background:linear-gradient(135deg,#fff,#ef4444);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.02em}
-.nav{display:flex;gap:32px;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+.nav{display:flex;gap:32px;position:absolute;left:calc(50% - 16px);top:50%;transform:translate(-50%,-50%)}
 .nav a{font-size:.9rem;font-weight:500;color:var(--text-2);transition:.2s;position:relative;padding-bottom:2px}
 .nav a:hover{color:var(--text)}
 .nav a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:2px;background:linear-gradient(90deg,var(--p1),var(--p3));transition:.3s;border-radius:2px;box-shadow:0 0 10px var(--glow)}
