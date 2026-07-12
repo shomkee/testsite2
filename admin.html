@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FPS BOOST — Admin Panel</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.admin-wrap{padding:40px 20px 100px;min-height:100vh}
+.admin-container{max-width:960px;margin:0 auto}
+.admin-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;flex-wrap:wrap;gap:14px}
+.admin-head h1{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700}
+.admin-actions{display:flex;gap:10px}
+.admin-card{background:linear-gradient(135deg,var(--bg-2),var(--bg-3));border:1px solid var(--border);border-radius:20px;padding:30px;margin-bottom:20px}
+.admin-card h2{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:600;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.tabs{display:flex;gap:6px;margin-bottom:24px;padding:6px;background:rgba(26,8,8,.6);border:1px solid var(--border);border-radius:14px;width:fit-content}
+.tab{padding:10px 18px;border-radius:10px;cursor:pointer;font-weight:500;font-size:.9rem;color:var(--text-2);transition:.2s}
+.tab.active{background:linear-gradient(135deg,var(--p2),var(--p3));color:#fff;box-shadow:0 5px 15px rgba(239,68,68,.3)}
+.tab:hover:not(.active){color:var(--text);background:rgba(239,68,68,.1)}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.8rem;color:var(--text-2);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;font-weight:500}
+.field input,.field textarea,.field select{width:100%;padding:12px 16px;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:inherit;font-size:.95rem;transition:.2s}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--p2);box-shadow:0 0 0 3px rgba(239,68,68,.15)}
+.field textarea{min-height:80px;resize:vertical}
+.field small{display:block;color:var(--text-3);font-size:.8rem;margin-top:4px}
+.btn-admin{padding:12px 24px;background:linear-gradient(135deg,var(--p2),var(--p3));color:#fff;border-radius:10px;font-weight:600;cursor:pointer;transition:.2s;font-size:.9rem}
+.btn-admin:hover{transform:translateY(-2px);box-shadow:0 10px 25px var(--glow)}
+.btn-admin.danger{background:linear-gradient(135deg,#7f1d1d,#450a0a)}
+.btn-admin.danger:hover{box-shadow:0 10px 25px rgba(127,29,29,.3)}
+.login-card{max-width:400px;margin:100px auto}
+.review-row{display:flex;align-items:center;gap:12px;padding:12px;background:rgba(0,0,0,.2);border-radius:10px;margin-bottom:8px;border:1px solid var(--border)}
+.review-row-info{flex:1;min-width:0}
+.review-row-info strong{display:block;margin-bottom:2px}
+.review-row-info small{color:var(--text-3);font-size:.8rem;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn-del{padding:6px 12px;background:#7f1d1d;color:#fff;border-radius:6px;font-size:.75rem;cursor:pointer;transition:.2s}
+.btn-del:hover{background:#450a0a}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:16px}
+.stat-box{padding:20px;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:12px;text-align:center}
+.stat-box .num{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,#fff,var(--p1));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat-box .label{font-size:.8rem;color:var(--text-2);margin-top:4px;text-transform:uppercase;letter-spacing:1px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+
+<div class="bg-gradient"></div>
+<div class="bg-grid"></div>
+<div class="bg-orb orb-1"></div>
+<div class="bg-orb orb-2"></div>
+
+<div class="admin-container" id="loginScreen">
+  <div class="admin-card login-card">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="font-size:3rem;margin-bottom:10px">🔐</div>
+      <h2 style="font-family:'Space Grotesk',sans-serif">Admin Login</h2>
+      <p style="color:var(--text-2);font-size:.9rem;margin-top:6px">Enter password to continue</p>
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="adminPass" placeholder="Enter admin password" value="admin">
+    </div>
+    <button class="btn-admin" style="width:100%" onclick="login()">LOGIN</button>
+    <p style="text-align:center;margin-top:14px;color:var(--text-3);font-size:.8rem">
+      Default: <code style="color:var(--p1)">admin</code>
+    </p>
+  </div>
+</div>
+
+<div class="admin-container hidden" id="adminPanel">
+  <div class="admin-head">
+    <div>
+      <h1><span class="grad">FPS BOOST</span> Admin</h1>
+      <p style="color:var(--text-2);font-size:.9rem;margin-top:4px">Site management panel</p>
+    </div>
+    <div class="admin-actions">
+      <a href="index.html" class="btn-admin" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px">View Site</a>
+      <button class="btn-admin danger" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="general">⚙️ General</div>
+    <div class="tab" data-tab="reviews">💬 Reviews</div>
+    <div class="tab" data-tab="stats">📊 Stats</div>
+  </div>
+
+  <div class="tab-content" id="tab-general">
+    <div class="admin-card">
+      <h2>🔑 Archive Password</h2>
+      <div class="field">
+        <label>Password (shown in install steps)</label>
+        <input type="text" id="cfgPassword" placeholder="fpsboost">
+      </div>
+      <button class="btn-admin" onclick="savePassword()">Save Password</button>
+    </div>
+
+    <div class="admin-card">
+      <h2>📦 Download File</h2>
+      <div class="field">
+        <label>File URL or Name</label>
+        <input type="text" id="cfgUrl" placeholder="fpsboost.zip or https://github.com/.../fpsboost.zip">
+        <small>Place file in repo root or paste full URL</small>
+      </div>
+      <div class="field">
+        <label>Display Name</label>
+        <input type="text" id="cfgName" placeholder="fpsboost.zip">
+      </div>
+      <div class="field">
+        <label>File Size (display)</label>
+        <input type="text" id="cfgSize" placeholder="18 MB">
+      </div>
+      <button class="btn-admin" onclick="saveConfig()">💾 Save All Settings</button>
+      <button class="btn-admin" style="margin-left:10px;background:linear-gradient(135deg,#10b981,#059f68)" onclick="testDownload()">🧪 Test</button>
+    </div>
+  </div>
+
+  <div class="tab-content hidden" id="tab-reviews">
+    <div class="admin-card">
+      <h2>➕ Add Review</h2>
+      <div class="field">
+        <label>Avatar (emoji)</label>
+        <input type="text" id="revAvatar" placeholder="🎮" maxlength="3">
+      </div>
+      <div class="field">
+        <label>User Name</label>
+        <input type="text" id="revName" placeholder="ProGamer2026">
+      </div>
+      <div class="field">
+        <label>Rating</label>
+        <select id="revRating">
+          <option value="5">★★★★★ (5 stars)</option>
+          <option value="4">★★★★☆ (4 stars)</option>
+          <option value="3">★★★☆☆ (3 stars)</option>
+          <option value="2">★★☆☆☆ (2 stars)</option>
+          <option value="1">★☆☆☆☆ (1 star)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Review Text</label>
+        <textarea id="revText" placeholder="Best booster ever..."></textarea>
+      </div>
+      <button class="btn-admin" onclick="addReview()">Add Review</button>
+    </div>
+
+    <div class="admin-card">
+      <h2>📋 Manage Reviews</h2>
+      <div id="reviewList"></div>
+      <button class="btn-admin danger" style="margin-top:14px" onclick="resetReviews()">Reset to Default</button>
+    </div>
+  </div>
+
+  <div class="tab-content hidden" id="tab-stats">
+    <div class="admin-card">
+      <h2>📊 Statistics</h2>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="num" id="statDownloads">0</div>
+          <div class="label">Downloads</div>
+        </div>
+        <div class="stat-box">
+          <div class="num" id="statReviews">0</div>
+          <div class="label">Custom Reviews</div>
+        </div>
+        <div class="stat-box">
+          <div class="num">localStorage</div>
+          <div class="label">Storage</div>
+        </div>
+      </div>
+      <button class="btn-admin danger" style="margin-top:20px" onclick="resetStats()">Reset Stats</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span id="toastText"></span></div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>
