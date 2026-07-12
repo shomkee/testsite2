@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+<div class="scroll-progress" id="scrollProgress"></div>
 <div class="bg-gradient"></div>
 <div class="bg-grid"></div>
 <div class="bg-orb orb-1"></div>
@@ -54,19 +55,20 @@
 <section class="hero">
 <div class="container hero-inner">
 <div class="hero-content">
-<div class="hero-badge">
+<div class="hero-badge reveal">
 <span class="badge-pulse"></span>
 <span>Updated 12.01.2026 — Working ✓</span>
 </div>
 <h1 class="hero-title">
-<span class="hero-line">Boost Your <span class="grad">FPS</span></span>
-<span class="hero-line">Fix <span class="grad">Lag Forever</span></span>
+<span class="hero-line reveal">Boost Your <span class="grad">FPS</span></span>
+<span class="hero-line reveal d1">Fix <span class="grad">Lag Forever</span></span>
 </h1>
-<p class="hero-sub">
+<p class="hero-sub reveal d2">
 Free ping reducer, lag fix, and FPS unlocker. Works in Fortnite, Valorant, CS2,
 Apex, and 200+ games. No subscription, no ads, just performance.
 </p>
-<div class="hero-actions">
+<div class="hero-actions reveal d3">
+<span class="glow-wrap">
 <a href="#" class="btn btn-primary" id="heroDownload">
 <span class="btn-bg"></span>
 <span class="btn-shine"></span>
@@ -78,6 +80,7 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 <span class="btn-meta" id="sizeBadge">v3.2 • 18 MB</span>
 </span>
 </a>
+</span>
 <a href="#features" class="btn btn-ghost">
 <span>View Features</span>
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
@@ -85,7 +88,7 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 </svg>
 </a>
 </div>
-<div class="hero-trust">
+<div class="hero-trust reveal d4">
 <div class="trust-item">
 <div class="trust-num" id="downloadsHero">412,847</div>
 <div class="trust-label">Downloads</div>
@@ -111,27 +114,27 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 <section class="trusted">
 <div class="container">
 <div class="trusted-grid">
-<div class="trusted-pill">
+<div class="trusted-pill reveal">
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
 <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
 </svg>
 <span>+200% FPS Boost</span>
 </div>
-<div class="trusted-pill">
+<div class="trusted-pill reveal d1">
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
 <path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
 <path d="M22 4L12 14.01l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
 </svg>
 <span>100% Safe</span>
 </div>
-<div class="trusted-pill">
+<div class="trusted-pill reveal d2">
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
 <path d="M21 12a9 9 0 11-9-9c2.52 0 4.93 1 6.74 2.74L21 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
 <path d="M21 3v5h-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
 </svg>
 <span>All Games</span>
 </div>
-<div class="trusted-pill">
+<div class="trusted-pill reveal d3">
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
 <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2"/>
 <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
@@ -142,15 +145,96 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 </div>
 </section>
 
+<section class="perf">
+<div class="container">
+<div class="perf-hero reveal">
+<div class="perf-hero-head">
+<h2>Boost Your FPS And Eliminate Stutters</h2>
+<p>Stabilize performance and maintain consistent FPS during gaming sessions.</p>
+<span class="glow-wrap">
+<a href="#" class="btn btn-primary" id="perfDownload">
+<span class="btn-bg"></span><span class="btn-shine"></span>
+<span class="btn-content">
+<span>Download for free</span>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+</span>
+</a>
+</span>
+<div class="chart-legend" style="margin-top:26px">
+<span class="lg"><span class="dot dot-after"></span>After FPS BOOST</span>
+<span class="lg"><span class="dot dot-before"></span>Before</span>
+</div>
+</div>
+<div class="perf-fps-chart">
+<canvas id="fpsChart" class="chart-canvas" data-h="260"></canvas>
+</div>
+</div>
+
+<div class="perf-grid">
+<div class="perf-card reveal">
+<h3>Improve Ping And Bufferbloat</h3>
+<p class="perf-card-sub">Optimize system and network usage to minimize delays and keep inputs responsive.</p>
+<div class="ping-chart">
+<div class="ping-plus">A+</div>
+<div class="ping-line"></div>
+<div class="ping-node bad" style="left:20%">
+<span class="pn-label">Without FPS BOOST</span>
+<span class="pn-dot"></span>
+<span class="pn-ms">57 ms</span>
+</div>
+<div class="ping-node good" style="left:80%">
+<span class="pn-label">With FPS BOOST</span>
+<span class="pn-dot"></span>
+<span class="pn-ms">0 ms</span>
+</div>
+</div>
+</div>
+<div class="perf-card reveal d1">
+<h3>Reduce Input Lag & System Latency</h3>
+<p class="perf-card-sub">Disable unnecessary background apps to free resources and maintain stable performance.</p>
+<div class="lat-legend">
+<span class="lg"><span class="sw" style="background:#ef4444"></span>Before <b>11 ms</b></span>
+<span class="lg"><span class="sw" style="background:#7c93ff"></span>After <b>2 ms</b></span>
+</div>
+<canvas id="latChart" class="chart-canvas" data-h="150"></canvas>
+</div>
+</div>
+
+<div class="perf-strip reveal">
+<div class="perf-mini">
+<div class="pm-head">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 21h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+<span>Supports Windows 10/11</span>
+</div>
+<p>Works with the latest Windows versions for easy setup.</p>
+</div>
+<div class="perf-mini">
+<div class="pm-head">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+<span>Safe to use</span>
+</div>
+<p>All tweaks are tested and reversible for stability.</p>
+</div>
+<div class="perf-mini">
+<div class="pm-head">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="6" width="20" height="12" rx="4" stroke="currentColor" stroke-width="2"/><path d="M6 12h4m-2-2v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="11" r="1.2" fill="currentColor"/><circle cx="18" cy="13" r="1.2" fill="currentColor"/></svg>
+<span>For every game</span>
+</div>
+<p>Optimized settings ensure smooth performance across all titles.</p>
+</div>
+</div>
+</div>
+</section>
+
 <section class="section" id="features">
 <div class="container">
-<div class="section-head">
+<div class="section-head reveal">
 <span class="section-tag">// FEATURES</span>
 <h2 class="section-title">Boost your PC <span class="grad">performance</span></h2>
 <p class="section-sub">Professional tools to fix lag, reduce ping, and unlock FPS. Free forever.</p>
 </div>
 <div class="features-grid">
-<div class="feature-card">
+<div class="feature-card reveal">
 <div class="feature-icon">
 <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
 <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor" fill-opacity="0.2" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
@@ -160,7 +244,7 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 <p>Remove FPS cap in any game. Unlock 144, 240, 360+ FPS for smooth gameplay on any monitor.</p>
 <span class="feature-tag">Premium</span>
 </div>
-<div class="feature-card">
+<div class="feature-card reveal d1">
 <div class="feature-icon">
 <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
 <path d="M2 12h6l3-9 4 18 3-9h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -170,7 +254,7 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 <p>Lower your ping by 30-70% with smart routing. Stable connection, no packet loss, no spikes.</p>
 <span class="feature-tag">Premium</span>
 </div>
-<div class="feature-card">
+<div class="feature-card reveal d2">
 <div class="feature-icon">
 <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
 <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
@@ -180,7 +264,7 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 <h3>RAM Cleaner</h3>
 <p>Auto-clean RAM, optimize background processes. Free up to 8GB of memory in one click.</p>
 </div>
-<div class="feature-card">
+<div class="feature-card reveal">
 <div class="feature-icon">
 <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
 <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
@@ -191,7 +275,7 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 <p>Boost CPU performance, disable unnecessary Windows services. Get 30-50% more performance.</p>
 <span class="feature-tag hot">HOT</span>
 </div>
-<div class="feature-card">
+<div class="feature-card reveal d1">
 <div class="feature-icon">
 <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
 <path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z" stroke="currentColor" stroke-width="2"/>
@@ -200,7 +284,7 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 <h3>Game Profiles</h3>
 <p>Pre-configured settings for 200+ games. Fortnite, Valorant, CS2, Apex, GTA V and more.</p>
 </div>
-<div class="feature-card">
+<div class="feature-card reveal d2">
 <div class="feature-icon">
 <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2"/>
@@ -214,22 +298,78 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 </div>
 </section>
 
+<section class="optimize">
+<div class="container">
+<div class="opt-head reveal">
+<h2><span>Optimize your System</span><span class="grad">for FREE</span></h2>
+<a href="#" class="opt-cta" id="optDownload">
+<span>Download for free</span>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+</a>
+</div>
+<div class="opt-grid">
+<div class="opt-card reveal">
+<div class="opt-visual">
+<div class="mini-toggle">
+<span class="mt-ico">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 3v6m0 0l-3-3m3 3l3-3M6 21h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+</span>
+<span class="mt-txt"><b>Set Latency Tolerance</b><small>Adjusts Windows &amp; GPU power thresholds</small></span>
+<span class="switch"></span>
+</div>
+<span class="warn-badge">⚠ 1 Warning</span>
+</div>
+<h3>System Tweaks</h3>
+<p>Fine tune Windows from its core system settings.</p>
+</div>
+<div class="opt-card reveal d1">
+<div class="opt-visual">
+<div class="detect-row"><span class="ok">✓</span><span>Graphics card detected — <b>GTX 1650</b></span></div>
+<div class="detect-row"><span class="ok">✓</span><span>Windows build — <b>Windows 11 24h2</b></span></div>
+<div class="detect-row"><span class="ok">✓</span><span>Processor — <b>Intel Core i7</b></span></div>
+</div>
+<h3>Smart System Detection</h3>
+<p>Recommendations tailored to your system.</p>
+</div>
+<div class="opt-card reveal d2">
+<div class="opt-visual">
+<div class="game-row"><span class="gi" style="background:#2b8fff">F</span><span class="gname"><b>Fortnite</b><small>Epic Games</small></span><span class="gtag on">Optimized</span></div>
+<div class="game-row"><span class="gi" style="background:#ff4655">V</span><span class="gname"><b>Valorant</b><small>Riot Games</small></span><span class="gtag off">Not yet</span></div>
+<div class="game-row"><span class="gi" style="background:#1f6feb">S</span><span class="gname"><b>Splitgate</b><small>1047 Games</small></span><span class="gtag off">Not yet</span></div>
+</div>
+<h3>Game Optimizations</h3>
+<p>Applies the best in-game settings for your rig.</p>
+</div>
+<div class="opt-card reveal d3">
+<div class="opt-visual">
+<div class="clean-row"><span class="cdot"></span><span>Clear Temp Files</span></div>
+<div class="clean-row"><span class="cdot"></span><span>Clear Games Temp</span></div>
+<div class="clean-row"><span class="cdot"></span><span>Clear Installer Cache</span></div>
+<div class="clean-row"><span class="cdot"></span><span>Clean up Windows Update</span></div>
+</div>
+<h3>System Cleaner</h3>
+<p>Optimizes applications and frees disk space.</p>
+</div>
+</div>
+</div>
+</section>
+
 <section class="section section-alt" id="instruction">
 <div class="container">
-<div class="section-head">
+<div class="section-head reveal">
 <span class="section-tag">// INSTALLATION</span>
 <h2 class="section-title">Install in <span class="grad">60 seconds</span></h2>
 <p class="section-sub">No technical knowledge required. Just download and click.</p>
 </div>
 <div class="steps">
-<div class="step">
+<div class="step reveal">
 <div class="step-num">1</div>
 <div class="step-body">
 <h3>Download the program</h3>
 <p>Click the download button and save the ZIP file to your desktop.</p>
 </div>
 </div>
-<div class="step">
+<div class="step reveal d1">
 <div class="step-num">2</div>
 <div class="step-body">
 <h3>Extract files</h3>
@@ -244,28 +384,28 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 </p>
 </div>
 </div>
-<div class="step">
+<div class="step reveal d2">
 <div class="step-num">3</div>
 <div class="step-body">
 <h3>Add to AV exclusions</h3>
 <p>Disable antivirus or add folder to exclusions. The program is 100% clean.</p>
 </div>
 </div>
-<div class="step">
+<div class="step reveal">
 <div class="step-num">4</div>
 <div class="step-body">
 <h3>Run as Administrator</h3>
 <p>Right-click <code>FPSBoost.exe</code> → "Run as administrator".</p>
 </div>
 </div>
-<div class="step">
+<div class="step reveal d1">
 <div class="step-num">5</div>
 <div class="step-body">
 <h3>Select your game</h3>
 <p>Choose your game from the list or browse for the .exe file manually.</p>
 </div>
 </div>
-<div class="step">
+<div class="step reveal d2">
 <div class="step-num">6</div>
 <div class="step-body">
 <h3>Click "Boost" and play!</h3>
@@ -278,13 +418,13 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 
 <section class="section" id="reviews">
 <div class="container">
-<div class="section-head">
+<div class="section-head reveal">
 <span class="section-tag">// REVIEWS</span>
 <h2 class="section-title">Trusted by <span class="grad">400,000+</span> gamers</h2>
 <p class="section-sub">Real reviews from real users of FPS BOOST</p>
 </div>
 <div class="reviews-grid" id="reviewsGrid">
-<div class="review-card">
+<div class="review-card reveal">
 <div class="review-stars">★★★★★</div>
 <p class="review-text">"My FPS went from 60 to 144 in Fortnite. No more lag spikes. This is insane, free and works perfectly!"</p>
 <div class="review-author">
@@ -295,7 +435,7 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 </div>
 </div>
 </div>
-<div class="review-card">
+<div class="review-card reveal d1">
 <div class="review-stars">★★★★★</div>
 <p class="review-text">"Ping dropped from 80ms to 25ms in Valorant. Best free alternative to ExitLag. 10/10!"</p>
 <div class="review-author">
@@ -306,7 +446,7 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 </div>
 </div>
 </div>
-<div class="review-card">
+<div class="review-card reveal d2">
 <div class="review-stars">★★★★★</div>
 <p class="review-text">"Was getting 40 FPS in CS2, now I have stable 200+ FPS. The CPU optimizer is magic!"</p>
 <div class="review-author">
@@ -317,7 +457,7 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 </div>
 </div>
 </div>
-<div class="review-card">
+<div class="review-card reveal">
 <div class="review-stars">★★★★★</div>
 <p class="review-text">"GTA V went from stuttering 30 FPS to smooth 90 FPS. RAM cleaner works wonders. Thank you!"</p>
 <div class="review-author">
@@ -328,7 +468,7 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 </div>
 </div>
 </div>
-<div class="review-card">
+<div class="review-card reveal d1">
 <div class="review-stars">★★★★★</div>
 <p class="review-text">"Apex Legends feels like a new game. Zero lag, stable 144 FPS. Best free booster ever!"</p>
 <div class="review-author">
@@ -339,7 +479,7 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 </div>
 </div>
 </div>
-<div class="review-card">
+<div class="review-card reveal d2">
 <div class="review-stars">★★★★★</div>
 <p class="review-text">"Easy to use, no registration, completely free. Works in every game I tried. 100% recommended!"</p>
 <div class="review-author">
@@ -356,62 +496,50 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 
 <section class="section section-alt" id="faq">
 <div class="container">
-<div class="section-head">
+<div class="section-head reveal">
 <span class="section-tag">// FAQ</span>
 <h2 class="section-title">Frequently <span class="grad">asked</span></h2>
 </div>
 <div class="faq-list">
-<div class="faq-item">
+<div class="faq-item reveal">
 <button class="faq-q">
 <span>Is FPS BOOST really free?</span>
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-<path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-</svg>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
 </button>
 <div class="faq-a"><p>Yes, 100% free. No hidden payments, no subscriptions, no ads. Just download and use.</p></div>
 </div>
-<div class="faq-item">
+<div class="faq-item reveal">
 <button class="faq-q">
 <span>Which games are supported?</span>
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-<path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-</svg>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
 </button>
 <div class="faq-a"><p>FPS BOOST works with 200+ games including Fortnite, Valorant, CS2, Apex Legends, GTA V, Minecraft, Roblox, and more.</p></div>
 </div>
-<div class="faq-item">
+<div class="faq-item reveal">
 <button class="faq-q">
 <span>Is it safe to use?</span>
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-<path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-</svg>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
 </button>
 <div class="faq-a"><p>Absolutely. FPS BOOST is verified by VirusTotal and has been used by 400,000+ gamers without any issues.</p></div>
 </div>
-<div class="faq-item">
+<div class="faq-item reveal">
 <button class="faq-q">
 <span>Will I get banned?</span>
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-<path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-</svg>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
 </button>
 <div class="faq-a"><p>No. FPS BOOST only optimizes your system performance. It doesn't interact with game files or anti-cheat. 100% safe.</p></div>
 </div>
-<div class="faq-item">
+<div class="faq-item reveal">
 <button class="faq-q">
 <span>What systems are supported?</span>
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-<path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-</svg>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
 </button>
 <div class="faq-a"><p>Windows 10 and Windows 11 (64-bit). Works on both weak and powerful PCs. Minimum 4GB RAM required.</p></div>
 </div>
-<div class="faq-item">
+<div class="faq-item reveal">
 <button class="faq-q">
 <span>How much FPS will I gain?</span>
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-<path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-</svg>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
 </button>
 <div class="faq-a"><p>On average, users report 50-200% FPS boost depending on their system. Ping reduction is typically 30-70%.</p></div>
 </div>
@@ -421,10 +549,11 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 
 <section class="cta-section">
 <div class="container">
-<div class="cta-card">
+<div class="cta-card reveal">
 <div class="cta-glow"></div>
-<h2 class="cta-title">Ready for <span class="grad">smooth gaming</span>?</h2>
+<h2 class="cta-title">Ready for smooth gaming?</h2>
 <p class="cta-sub">Join 400,000+ gamers who already boosted their FPS. Free, safe, no registration.</p>
+<span class="glow-wrap">
 <a href="#" class="btn btn-primary btn-large" id="ctaDownload">
 <span class="btn-bg"></span>
 <span class="btn-shine"></span>
@@ -435,6 +564,7 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 <span>Download FPS BOOST Free</span>
 </span>
 </a>
+</span>
 <div class="cta-meta">
 <span>✓ No virus</span>
 <span>•</span>
@@ -452,7 +582,7 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 <div class="footer-col">
 <div class="logo">
 <span class="logo-icon">
-<svg width="32" height="32" viewBox="0 -1.5 36 36" fill="none">
+<svg width="36" height="36" viewBox="0 -1.5 36 36" fill="none">
 <path d="M18 3L4 10v13l14 7 14-7V10L18 3z" fill="url(#logoGrad)" fill-opacity="0.15" stroke="url(#logoGrad)" stroke-width="2" stroke-linejoin="round"/>
 <path d="M18 11l-7 4v6l7 4 7-4v-6l-7-4z" fill="url(#logoGrad)"/>
 </svg>
@@ -484,7 +614,7 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 </div>
 <div class="footer-bottom">
 <span>© 2026 FPS BOOST. All rights reserved.</span>
-<a href="admin.html" style="color:var(--text-3);text-decoration:none;font-size:.8rem">⚙️</a>
+<span>⚙️</span>
 </div>
 </div>
 </footer>
@@ -493,14 +623,9 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 <div class="modal-content">
 <button class="modal-close" id="modalClose">×</button>
 <div class="modal-icon">
-<svg width="56" height="56" viewBox="0 0 24 24" fill="none">
-<circle cx="12" cy="12" r="10" stroke="url(#modalGrad)" stroke-width="2" stroke-dasharray="50 30" class="spinner"/>
-<defs>
-<linearGradient id="modalGrad" x1="0" y1="0" x2="24" y2="24">
-<stop stop-color="#ef4444"/>
-<stop offset="1" stop-color="#991b1b"/>
-</linearGradient>
-</defs>
+<svg class="spinner" width="48" height="48" viewBox="0 0 24 24" fill="none">
+<circle cx="12" cy="12" r="10" stroke="rgba(239,68,68,.2)" stroke-width="3"/>
+<path d="M12 2a10 10 0 019 5.6" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
 </svg>
 </div>
 <h3>Preparing your download</h3>
@@ -511,13 +636,29 @@ Apex, and 200+ games. No subscription, no ads, just performance.
 <p class="modal-status" id="modalStatus">Connecting to server...</p>
 </div>
 </div>
-<div class="toast" id="toast"><span id="toastText"></span></div>
-<a href="#" class="float-download" id="floatDownload" aria-label="Download">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-<path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-</svg>
+
+<div class="toast" id="toast">
+<span id="toastText">Copied!</span>
+</div>
+
+<div class="sysbar" id="sysbar">
+<span class="sysbar-ico">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+</span>
+<span class="sysbar-txt"><b>Optimize your system for free</b><small>+200% FPS • lower ping • no lag • v3.2</small></span>
+<a href="#" class="sysbar-btn" id="sysbarDownload">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
 <span>Download</span>
 </a>
+</div>
+
+<a href="#" class="float-download" id="floatDownload">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+<path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
+<span>Download Free</span>
+</a>
+
 <script src="js/main.js"></script>
 </body>
 </html>
